@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'blog.index')->name('blog.index');
+
+Route::get('post/create', function () {
+    return view('blog.create');
+})->name('post.create');
+
+Route::get('post/{id}', function () {
+    return view('blog.post');
+})->name('post.view');
