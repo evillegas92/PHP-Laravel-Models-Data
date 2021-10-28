@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'blog.index')->name('blog.index');
+Route::get('/', 'PostsController@getIndex')->name('blog.index');
 
-Route::get('post/create', function () {
-    return view('blog.create');
-})->name('post.create');
-
-Route::get('post/{id}', function () {
-    return view('blog.post');
-})->name('post.view');
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('create', function () {
+        return view('blog.create');
+    })->name('post.create');
+    
+    Route::post('upsert', function (\Illuminate\Http\Request $request) {
+        return redirect()->route('blog.index')->with('info', 'Post created/updated successfully.');
+    })->name('post.upsert');
+    
+    Route::get('{id}', function ($id) {
+        return view('blog.post');
+    })->name('post.view');
+});
