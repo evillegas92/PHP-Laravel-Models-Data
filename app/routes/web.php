@@ -13,18 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PostsController@getIndex')->name('blog.index');
+Route::get('/', [
+    'uses' => 'PostsController@getIndex',
+    'as' => 'blog.index'
+]);
 
 Route::group(['prefix' => 'posts'], function () {
-    Route::get('create', function () {
-        return view('blog.create');
-    })->name('post.create');
+    Route::get('create', [
+        'uses' => 'PostsController@getCreatePost',
+        'as' => 'post.create'
+    ]);
     
-    Route::post('upsert', function (\Illuminate\Http\Request $request) {
-        return redirect()->route('blog.index')->with('info', 'Post created/updated successfully.');
-    })->name('post.upsert');
+    Route::post('upsert', [
+        'uses' => 'PostsController@postUpsertPost',
+        'as' => 'post.upsert'
+    ]);
     
-    Route::get('{id}', function ($id) {
-        return view('blog.post');
-    })->name('post.view');
+    Route::get('{id}', [
+        'uses' => 'PostsController@getPost',
+        'as' => 'post.view'
+    ]);
 });

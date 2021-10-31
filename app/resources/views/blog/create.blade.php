@@ -10,8 +10,8 @@
         <div class="col-4">
             <form action="{{ route('post.upsert') }}" method="post">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name of the Post</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Post name">
+                    <label for="title" class="form-label">Name of the Post</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Post name">
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Post Content</label>
