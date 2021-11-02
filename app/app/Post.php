@@ -2,9 +2,13 @@
 
 namespace App;
 
-class Post 
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
 {
     const POSTS_SESSION_KEY = "posts";
+
+    protected $fillable = ['title', 'content']; //this field is to specify the properties that are auto-mapped to database columns.
 
     public function getPosts($session)
     {
